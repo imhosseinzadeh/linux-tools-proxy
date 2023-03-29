@@ -17,7 +17,9 @@ Acquire::ftp::Proxy "http://127.0.0.1:10808";
 # ============ snap pacakge manager ============
 
 sudo snap set system proxy.http="http://<proxy_addr>:<proxy_port>"
+
 sudo snap set system proxy.https="http://<proxy_addr>:<proxy_port>"
+
 sudo snap set system proxy.ftp="http://<proxy_addr>:<proxy_port>"
 
 *Available since snapd 2.28.
