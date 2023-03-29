@@ -27,11 +27,13 @@ sudo snap set system proxy.ftp="http://<proxy_addr>:<proxy_port>"
 # ============ Git ============
 
 If your proxy does not require authentication:
+
 git config --global http.proxy https://YOUR.PROXY.SERVER:8080
 
 *Replace YOUR.PROXY.SERVER with you proxy's URL
 
 If your proxy does require authentication:
+
 git config --global http.proxy https://YOUR_PROXY_USERNAME:YOUR_PROXY_PASSWORD@YOUR.PROXY.SERVER:8080
 
 *Replace YOUR_PROXY_USERNAME with the username used to authenticate into your proxy, YOUR_PROXY_PASSWORD with the
