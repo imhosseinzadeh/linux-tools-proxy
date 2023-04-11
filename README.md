@@ -1,5 +1,14 @@
 # How to configure proxy for Linux tools
 
+# ============ System-Wide Proxy ============
+
+vi ~/.profile
+export "http_proxy=http://127.0.0.1:10809"
+export "https_proxy=http://127.0.0.1:10809"
+export "no_proxy=localhost, ::1,127.0.0.1"
+
+source ~/.profile
+
 # ============ apt pacakge manager ============
 
 sudo nano /etc/apt/apt.conf
