@@ -15,9 +15,9 @@ To set up a system-wide proxy configuration:
 2. Add the following lines at the end of the file:
 
     ```bash
-    export http_proxy=http://127.0.0.1:10809
-    export https_proxy=http://127.0.0.1:10809
-    export no_proxy=localhost,::1,127.0.0.1
+    export http_proxy=http://proxy_server_address:proxy_port
+    export https_proxy=https://proxy_server_address:proxy_port
+    export no_proxy=localhost, ::1,127.0.0.1
     ```
 
 3. Apply the changes:
@@ -40,7 +40,7 @@ To configure the APT package manager:
 
    ```plaintext
    Acquire::http::Proxy "http://proxy_server_address:proxy_port";
-   Acquire::https::Proxy "http://proxy_server_address:proxy_port";
+   Acquire::https::Proxy "https://proxy_server_address:proxy_port";
    ```
 3. Save the file and exit.
 
@@ -68,7 +68,7 @@ To set proxy settings for the Snap package manager:
 
 ```bash
 sudo snap set system proxy.http="http://proxy_server_address:proxy_port"
-sudo snap set system proxy.https="http://proxy_server_address:proxy_port"
+sudo snap set system proxy.https="https://proxy_server_address:proxy_port"
 ```
 
 ## Git
