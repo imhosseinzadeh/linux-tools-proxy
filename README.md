@@ -1,52 +1,93 @@
-# How to configure proxy for Linux tools
+# Configuring Proxy for Linux Tools
 
-# ============ System-Wide Proxy ============
+#### Note: Replace <proxy_addr> and <proxy_port> with your proxy server address and port respectively.
 
-vi ~/.profile
+## System-Wide Proxy
 
-export "http_proxy=http://127.0.0.1:10809"
+To set up a system-wide proxy configuration:
 
-export "https_proxy=http://127.0.0.1:10809"
+1. Open `~/.profile` in your preferred text editor:
 
-export "no_proxy=localhost, ::1,127.0.0.1"
+    ```bash
+    vi ~/.profile
+    ```
 
-source ~/.profile
+2. Add the following lines at the end of the file:
 
-# ============ apt pacakge manager ============
+    ```bash
+    export http_proxy=http://127.0.0.1:10809
+    export https_proxy=http://127.0.0.1:10809
+    export no_proxy=localhost,::1,127.0.0.1
+    ```
 
-sudo nano /etc/apt/apt.conf
+3. Apply the changes:
 
-=== PASTE THIS ===
+    ```bash
+    source ~/.profile
+    ```
 
-Acquire::http::Proxy "http://127.0.0.1:10809";
+## APT Package Manager
 
-Acquire::https::Proxy "http://127.0.0.1:10809";
+To configure the APT package manager:
 
-Acquire::socks&zwnj;::Proxy "http://127.0.0.1:10808";
+1. Open `/etc/apt/apt.conf` with root privileges:
 
-Acquire::ftp::Proxy "http://127.0.0.1:10808";
+    ```bash
+    sudo vi /etc/apt/apt.conf
+    ```
 
-# ============ snap pacakge manager ============
+2. Paste the following configuration:
 
-sudo snap set system proxy.http="http://<proxy_addr>:<proxy_port>"
+   ```plaintext
+   Acquire::http::Proxy "http://proxy_server_address:proxy_port";
+   Acquire::https::Proxy "http://proxy_server_address:proxy_port";
+   ```
+   
+3. Apply the changes:
 
-sudo snap set system proxy.https="http://<proxy_addr>:<proxy_port>"
+    ```bash
+    source /etc/apt/apt.conf
+    ```
 
-sudo snap set system proxy.ftp="http://<proxy_addr>:<proxy_port>"
+## Snap Package Manager
 
-*Available since snapd 2.28.
+To set proxy settings for Snap package manager:
 
-# ============ Git ============
+```bash
+sudo snap set system proxy.http="http://proxy_server_address:proxy_port"
+sudo snap set system proxy.https="http://proxy_server_address:proxy_port"
+```
 
-If your proxy does not require authentication:
+## Git
 
-git config --global http.proxy https://YOUR.PROXY.SERVER:8080
+To configure Git with or without authentication for proxy:
 
-*Replace YOUR.PROXY.SERVER with you proxy's URL
+Without authentication:
 
-If your proxy does require authentication:
+```bash
+git config --global http.proxy http://proxy_server_address:proxy_port
+git config --global https.proxy https://proxy_server_address:proxy_port
+```
 
-git config --global http.proxy https://YOUR_PROXY_USERNAME:YOUR_PROXY_PASSWORD@YOUR.PROXY.SERVER:8080
+If your proxy requires authentication, you can include your username in the URL:
 
-*Replace YOUR_PROXY_USERNAME with the username used to authenticate into your proxy, YOUR_PROXY_PASSWORD with the
-password used to authenticate into your proxy, and YOUR.PROXY.SERVER with your proxy's URL
+```bash
+git config --global http.proxy http://username@proxy_server_address:proxy_port
+git config --global https.proxy https://username@proxy_server_address:proxy_port
+```
+
+**Verify the configuration**: You can verify that the proxy settings are correctly configured by checking your Git
+configuration:
+
+```bash
+git config --global --get http.proxy
+git config --global --get https.proxy
+```
+
+**Unset proxy configuration**: If you want to remove the proxy configuration, you can unset it using:
+
+```bash
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+This will revert Git to using no proxy.
