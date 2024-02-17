@@ -42,16 +42,29 @@ To configure the APT package manager:
    Acquire::http::Proxy "http://proxy_server_address:proxy_port";
    Acquire::https::Proxy "http://proxy_server_address:proxy_port";
    ```
-   
-3. Apply the changes:
+3. Save the file and exit.
 
-    ```bash
-    source /etc/apt/apt.conf
-    ```
+## DNF Package Manager
+
+To configure the DNF package manager:
+
+1. Open /etc/dnf/dnf.conf with root privileges:
+
+   ```bash
+   sudo vi /etc/dnf/dnf.conf
+   ```
+
+2. Add or modify the following lines in the [main] section:
+
+   ```plaintext
+   proxy=http://<proxy_addr>:<proxy_port>
+   ```
+
+3. Save the file and exit.
 
 ## Snap Package Manager
 
-To set proxy settings for Snap package manager:
+To set proxy settings for the Snap package manager:
 
 ```bash
 sudo snap set system proxy.http="http://proxy_server_address:proxy_port"
@@ -90,4 +103,5 @@ git config --global --get https.proxy
 git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
+
 This will revert Git to using no proxy.
