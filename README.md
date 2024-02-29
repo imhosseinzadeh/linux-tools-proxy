@@ -105,3 +105,37 @@ git config --global --unset https.proxy
 ```
 
 This will revert Git to using no proxy.
+
+## Docker
+
+1. Create the directory:
+   
+    ```bash
+    sudo mkdir -p /etc/systemd/system/docker.service.d
+    ```
+
+2. Create the file:
+
+   ```bash
+   sudo vi /etc/systemd/system/docker.service.d/http-proxy.conf
+   ```
+
+3. Paste the following configuration and save the file:
+
+   ```plaintext
+   [Service]
+   Environment="HTTP_PROXY=http://proxy_server_address:proxy_port"
+   Environment="HTTPS_PROXY=https://proxy_server_address:proxy_port"   
+   ```
+   
+4. Restart daemon:
+   
+   ```bash
+   systemctl daemon-reload
+   ```
+
+5. Restart docker service:
+
+   ```bash
+   service docker restart
+   ```
