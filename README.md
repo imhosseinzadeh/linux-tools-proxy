@@ -125,7 +125,7 @@ This will revert Git to using no proxy.
    ```plaintext
    [Service]
    Environment="HTTP_PROXY=http://proxy_server_address:proxy_port"
-   Environment="HTTPS_PROXY=https://proxy_server_address:proxy_port"   
+   Environment="HTTPS_PROXY=https://proxy_server_address:proxy_port"
    ```
    
 4. Restart daemon:
